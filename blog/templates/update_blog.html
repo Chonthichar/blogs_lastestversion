@@ -1,0 +1,61 @@
+{#form.html#}
+
+{% extends 'base.html' %}
+{% block title %}Edit Blog Post {% endblock %}
+
+<br><br><br>
+
+{% block content %}
+
+    {#    current user:  {{ user.id }}#}
+    {#    blog author: {{ pk.user.id }}#}
+    {#    <br>#}
+    <div class="container">
+        {#        <small class="text-muted">#}
+        {#            By: {{ user.author }}#}
+        {#        </small>#}
+
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <div class=" border-left-info shadow py-2">
+                    <div class="card-header text-white text-center">
+                        <h2 class="text-info-emphasis list-group-item list-group-item-dark p-3">Edit Post ..</h2>
+                    </div>
+
+                    <div class="card-body p-4">
+                        {% if user.is_authenticated %}
+                            {#        {% if user.id == title.user.id %}#}
+                            <div class="form-group">
+                                <form method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    {{ form.media }}
+                                    {{ form.as_p }}
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-secondary">Submit</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                            {#        {% else %}#}
+                            {#        {% endif %}#}
+                        {% else %}
+                            <div class="alert alert-warning" role="alert">
+                                You are not allowed here.
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    {#        <div class="card">#}
+
+    <br>
+
+{% endblock %}
+
+{#vThe enctype="multipart/form-data" attribute is necessary because the form includes file fields (ImageField and FileField).#}
+{#form.as_p renders the form as a series of paragraphs, with each form field wrapped in a <p> tag. You can use form.as_table or form.as_ul for different renderings.#}

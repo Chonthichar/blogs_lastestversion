@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Delete Blog ...{% endblock %}
+{% block content %}
+
+
+    {#        <p>Are you sure do you want to delete {{ object }}?</p>#}
+
+    {#    <h3>Delete: {{ post.title }}</h3>#}
+    {#    current user:  {{ user.id }}#}
+    {#    blog author: {{ user.id }}#}
+    <div class="card">
+        <div class="card-header bg-dark text-white">
+            <h4>Delete blog..</h4>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Confirm Deletion</h5>
+            <p class="card-text">Are you sure do you want to delete {{ object }}?</p>
+            {% if user.is_authenticated %}
+                {#        {% if user.id == title.user.id %}#}
+{#                <br>#}
+                <div class="form-group">
+                    <form method="POST" class="d-inline">
+                        {% csrf_token %}
+                        {#                        <input type="submit" value="Confirm">#}
+                        <button type="submit" class="btn btn-danger">Confrim Delete</button>
+                    </form>
+
+                    <a class="btn btn-secondary" href="{% url 'blog:home' %}">Cancel</a>
+                </div>
+                {#        {% endif %}#}
+            {% else %}
+                <p class="alert alert-danger">You are not allows here.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

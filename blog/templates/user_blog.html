@@ -1,0 +1,206 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ title.title }} {% endblock %}
+
+{% block content %}
+    {#    current user:  {{ user.id }}#}
+    {#    blog author: {{ title.user.id }}#}
+    {#    <p>user page {{ page_user }}</p>#}
+
+
+
+    <div class="container mt-4">
+        <div class="mb-3">
+
+            <h2 class="display-7">{{ title.title }}</h2>
+
+
+            {#    if somebody alredy like it we will unlike, else they havnt like then we shows like button#}
+            <form action="{% url 'blog:like_post' title.pk %}" method="POST">{% csrf_token %}
+                {% if user.is_authenticated %}
+                    {% if unlike %}
+                        <button type="submit" , name="title_id" , value="{{ title.id }}" ,
+                                class="btn btn-danger btn-sm me-2">
+                            <i class="bi bi-heart-fill"></i>
+                            UnLike
+                        </button>
+                    {% else %}
+                        <button type="submit" , name="title_id" , value="{{ title.id }}" ,
+                                class="btn btn-primary btn-sm me-2">
+                            <i class="bi bi-heart"></i>
+                            Like
+                        </button>
+
+                    {% endif %}
+                    <span class="badge bg-secondary">{{ total_like }} Likes</span>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login To like</a>
+                    </li>
+                {% endif %}
+            </form>
+
+            {#    this title.id will pas 15 into the backend#}
+            <hr>
+            <small>
+                <p class="text-muted">By: {{ title.author }} -
+                    {{ title.created_on }}
+
+                    {% if user.is_authenticated %}
+                        {% if user.id == title.user.id %}
+                            <a class="badge badge-primary text-wrap text-decoration-none" style="width: 3rem;"
+                               href="{% url 'blog:edit_post' title.id %}"> Edit</a>
+
+                            <a class="badge badge-primary text-wrap text-decoration-none btn btn-danger"
+                               style="width: 3rem;"
+                               href="{% url 'blog:delete_blog' title.pk %}">Delete</a>
+                            </p>
+                            </small>
+                        {% endif %}
+                    {% endif %}
+
+
+            <br>
+            {{ title.content|safe }}
+            <br>
+        </div>
+
+        <div class=" row row-cols-1 row-cols-md-2 g-4">
+            <div class="container mt-4 centered-content">
+                {#                    <div class="p-3 border bg-light">#}
+                {% if title.video %}
+                    {#                        <video class="img-fluid p-3 bg-light border rounded" controls>#}
+                    <video class="img-fluid" controls>
+                        <source src="{{ title.video.url }}" type="video/mp4">
+                        Your Browser does not support the video tags
+                    </video>
+                {% else %}
+                    <h1>No video Display</h1>
+                {% endif %}
+            </div>
+
+            {#            <div class="col-md-6 mb-3">#}
+            {#                    <div class="p3 bg-light border rounded">#}
+            {#                        <div class="img-fluid p-3 bg-light border rounded" control>#}
+            {#                {% if title.image %}#}
+            {#                    <img class="img-fluid rounded" style=" object-fit: cover;"#}
+            {#                         src="{{ title.image.url }}"#}
+            {#                         alt="{{ title.title }}" controls>#}
+            {#                {% else %}#}
+            {#                    <h1>No data display</h1>#}
+            {#                {% endif %}#}
+            {#                        </div>#}
+            {#                    </div>#}
+            {#            </div>#}
+
+            {#            <div class="col-md-6 mb-3">#}
+            {#                    <div class="p3 bg-light border rounded">#}
+            {#                        <div class="img-fluid p-3 bg-light border rounded" control>#}
+            {#                {% if title.image %}#}
+            {#                    <img class="img-fluid rounded" style=" object-fit: cover;"#}
+            {#                         src="{{ title.image.url }}"#}
+            {#                         alt="{{ title.title }}" controls>#}
+            {#                {% else %}#}
+            {#                    <h1>No data display</h1>#}
+            {#                {% endif %}#}
+            {#                        </div>#}
+            {#                    </div>#}
+            {#            </div>#}
+        </div>
+
+
+        {#    Profile#}
+        {#    <img src="{{ title.user.profile.picture_profile.url }}" alt="photo" width=100 height="100" class="rounded-pill">#}
+
+        <div class="card mb-3">
+            <div class="card-header">
+                {{ title.author }}
+            </div>
+            <div class=" header row g-0">
+                <div class="col-md-2">
+
+                    {% if title.user.profile.picture_profile %}
+
+                        <img src="{{ title.user.profile.picture_profile.url }}" class="img-fluid rounded-start mt-2"
+                             alt="Profile Picture">
+                    {% else %}
+                        <img src="{% static 'blog/images/img_1.png' %}" alt="card-img" width="100" height="100">
+                    {% endif %}
+                </div>
+                <div class="col-md-10">
+                    <div class="card-body">
+                        {#                        <h5 class="card-title">{{ title.author }}</h5>#}
+                        <p class="small text-muted">
+
+                            {% if title.user.profile %}
+                                <a href="{% url 'profile_page' title.user.id %}" class="text-muted me-2">Profile
+                                    Page</a>
+                            {% endif %}
+
+
+                            {% if title.user.profile.facebook_url %}
+                                <a href="{{ title.user.profile.facebook_url }}"
+                                   class="text-muted me-2 ">Facbook </a>
+                            {% endif %}
+                            {% if title.user.profile.twitter_url %}
+                                <a href="{{ title.user.profile.twitter_url }}" class="text-muted me-2">Twitter </a>
+                            {% endif %}
+                            {% if title.user.profile.instagram_url %}
+                                <a href="{{ title.user.profile.instagram_url }} "
+                                   class="text-muted me-2">Instagram</a>
+                            {% endif %}
+                        </p>
+
+                        <p class="card-text">{{ title.user.profile.bio }}</p>
+                        <p class="card-text"><small class="text-body-secondary text-muted">Last updated 3 mins
+                            ago</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{#        br#}
+        <hr>
+        <div class="container mt-4">
+            <h2 class="mb-3">Comments..</h2>
+            {#    {{ title.comments.all }}#}
+            {#our model is singular comment in model we set related name to comments and it will get thing out from comments#}
+            <h6 class="text-muted">{{ title.comments.all.count }} Comment(s)</h6>
+            {% if not title.comments.all %}
+                <div class="alert alert-info" role="alert">
+                    No comment Yet...<a href="{% url 'blog:post_comment' title.id %}">Add one..</a>
+                </div>
+            {% else %}
+
+                <br>
+                {#        #}
+                {% for comment in title.comments.all %}
+                    {#        call from model#}
+                    <div class="card mt-3">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ comment.name }} </h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ comment.added_date }}</h6>
+                            <p> {{ comment.body }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+                <br>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <a class="btn btn-primary stretched-link" href="{% url 'blog:post_comment' title.id %} ">Add
+                        comment</a>
+
+                </div>
+            {% endif %}
+        </div>
+
+
+        <br><br>
+        {#    {{ title.content|safe }}#}
+        <a href="{% url 'blog:home' %}">
+            <button type="button" class="btn btn-secondary">Back</button>
+        </a>
+    </div>
+
+    <br>
+{% endblock %}

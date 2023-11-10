@@ -1,0 +1,41 @@
+{#form.html#}
+
+{% extends 'base.html' %}
+{% block title %}Add your comment here ...{% endblock %}
+
+<br><br><br>
+
+{% block content %}
+    {#    <small>#}
+    {#        By: {{ title.user }}#}
+    {#    </small>#}
+    {#    <hr>#}
+    <div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class=" border-left-info shadow py-2">
+                <div class="card-header text-white text-center">
+                    <h2 class="text-info-emphasis list-group-item list-group-item-dark p-3"> Add Comment..</h2>
+                    <div class="card m-3">
+                        <div class="card-body">
+                            <form method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+
+                                {{ form.as_p }}
+                                <button type="submit" class="btn btn-secondary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {#Just check value id of that persopn who is login#}
+
+
+{% endblock %}
+
+{#vThe enctype="multipart/form-data" attribute is necessary because the form includes file fields (ImageField and FileField).#}
+{#form.as_p renders the form as a series of paragraphs, with each form field wrapped in a <p> tag. You can use form.as_table or form.as_ul for different renderings.#}
