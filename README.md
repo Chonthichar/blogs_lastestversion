@@ -2,7 +2,7 @@
 
 ## Suggest to creat new project for this and make sure you are in the right directory : 
 'ls' : check elements in that directory ,  
-'cd' : go to furthur directory, 
+'cd' : go to furthur directory,    <br>
 'cd..' : back to previous directory
 
 1) Create virtual environment on your local machine and activate it by go into then directry use 'cd':
