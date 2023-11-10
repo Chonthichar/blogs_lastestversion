@@ -14,9 +14,8 @@
  <br>
 run >> python3 manage.py makemigrations
 <br>
-   <img width="209" alt="image" src="https://github.com/Chonthichar/blogs_lastestversion/assets/84187224/544206d4-5981-40f0-bfad-98c36e9d8c22">
+   >> python3 manage.py migrate
    <br>
-<br>
-<img width="196" alt="image" src="https://github.com/Chonthichar/blogs_lastestversion/assets/84187224/46919a3c-7e12-42e7-93da-41e6ce7ded9c">
+   >> python3 manage.py runserver
 
 
