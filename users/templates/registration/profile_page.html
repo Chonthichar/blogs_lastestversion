@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block title %} Blog and Vlog Application{% endblock %}
+
+{% block content %}
+
+
+    {#    {{ page_user }}#}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <div class=" border-left-info shadow py-2">
+                    <div class="card-header text-white text-center">
+                        <h2 class="text-info-emphasis list-group-item list-group-item-dark p-3">Profile Page ...</h2>
+                    </div>
+                    <div class="card m-3">
+                        <div class="row g-0">
+                            <div class="col-md-2">
+                                {% if page_user.picture_profile %}
+
+                                    <img src="{{ page_user.picture_profile.url }}" class="img-fluid rounded-start"
+                                         alt="...">
+                                {% else %}
+                                    <img src="{% static 'blog/images/img_1.png' %}" alt="card-img" width="100"
+                                         height="100">
+
+                                {% endif %}
+                            </div>
+                            <div class="col-md-10">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ page_user.user.author }}</h5>
+
+
+                                    <p class="small text-muted">
+
+                                        {#                        <a href="{% url 'show_profile_page' page_user.user.profile.id %}">Profile page</a>#}
+                                        {#                        <a href="{% url 'profile_page' page_user.profile.id %}">Profile page</a>#}
+
+
+
+                                        {% if page_user.facebook_url %}
+                                            <a class="text-muted me-2" href="{{ page_user.facebook_url }}">Facbook |</a>
+                                        {% endif %}
+                                        {% if page_user.twitter_url %}
+                                            <a class="text-muted me-2" href="{{ page_user.twitter_url }}">Twitter |</a>
+                                        {% endif %}
+                                        {% if page_user.instagram_url %}
+                                            <a class="text-muted me-2"
+                                               href="{{ page_user.instagram_url }}">Instagram</a>
+                                        {% endif %}
+                                    </p>
+
+                                    <p class="card-text">{{ page_user.bio }}</p>
+                                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins
+                                        ago</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <a href="{% url 'blog:home' %}" class="m-3">
+                            <button type="button" class="btn btn-secondary">Back ...</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <br><br>
+    {{ title.content|safe }}
+
+
+{% endblock %}

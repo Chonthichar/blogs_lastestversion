@@ -1,0 +1,39 @@
+{#form.html#}
+
+{% extends 'base.html' %}
+{% block title %} Registration Page ... {% endblock %}
+
+
+{% block content %}
+
+    {#    <hr>#}
+
+    <div class="container my-4">
+{#        <h2 class="text-info-emphasis">Register new user ...</h2>#}
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class=" border-left-info shadow py-2">
+                    <div class="card-header text-white text-center">
+                        <h2 class="text-info-emphasis list-group-item list-group-item-dark p-3"> Register new user
+                            ...</h2>
+                    </div>
+                    <div class="card-body p-5">
+                        <form method="post" enctype="multipart/form-outline mb-4">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <div class="text-center mt-1">
+                                <button type="submit" class="btn btn-secondary ">Register new user</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{#vThe enctype="multipart/form-data" attribute is necessary because the form includes file fields (ImageField and FileField).#}
+{#form.as_p renders the form as a series of paragraphs, with each form field wrapped in a <p> tag. You can use form.as_table or form.as_ul for different renderings.#}

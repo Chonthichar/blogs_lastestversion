@@ -1,0 +1,43 @@
+{#form.html#}
+
+{% extends 'base.html' %}
+{% block title %}Create a new Profile Page ... {% endblock %}
+
+<br><br><br>
+
+{% block content %}
+    {#    <small>#}
+    {#        By: {{ title.user }}#}
+    {#    </small>#}
+    {#    <hr>#}
+    <div class="container my-5">
+        <h2 class="text-info-emphasis mb-4">Create Profile page..</h2>
+        <div class="card">
+            <div class="card-body">
+                {% if user.is_authenticated %}
+                    <div class="form-group">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form.media }}
+                            {{ form.as_p }}
+                            <button type="submit" class="btn btn-secondary">Submit</button>
+                        </form>
+                    </div>
+                    {#Just check value id of that persopn who is login#}
+                {% else %}
+                    <div class="alert alert-warning" role="alert">
+                        You are not allowed here.
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+
+{% endblock %}
+
+{#vThe enctype="multipart/form-data" attribute is necessary because the form includes file fields (ImageField and FileField).#}
+{#form.as_p renders the form as a series of paragraphs, with each form field wrapped in a <p> tag. You can use form.as_table or form.as_ul for different renderings.#}
