@@ -12,6 +12,7 @@
 4) run to install >> python -m pip install Pillow"
 5) run : >> python3 manage.py makemigrations
    >> python3 manage.py migrate
+   <br>
    >> python3 manage.py runserver
 
 
