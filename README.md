@@ -1,4 +1,9 @@
-# blogs_lastestversion
+
+
+## Suggest to creat new project for this and make sure you are in the right directory : 
+'ls' : check elements in that directory ,  
+'cd' : go to furthur directory and 
+'cd..' : back to previous directory
 
 1) Create virtual environment on your local machine and activate it by go into then directry use 'cd':
    <img width="311" alt="image" src="https://github.com/Chonthichar/blogs_lastestversion/assets/84187224/6283df56-6061-4949-b6c5-48a9c58ddac9">
