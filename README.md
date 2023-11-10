@@ -10,9 +10,6 @@
    <br>
    <img width="368" alt="image" src="https://github.com/Chonthichar/blogs_lastestversion/assets/84187224/5a1ebd98-2568-442b-bb7b-8ec35a17fc75">
 4) run to install >> python -m pip install Pillow"
-5) run : >> python3 manage.py makemigrations
-   >> python3 manage.py migrate
-   <br>
-   >> python3 manage.py runserver
+5) run : >> python3 manage.py makemigrations, >> python3 manage.py migrate, >> python3 manage.py runserver
 
 
